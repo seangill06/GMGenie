@@ -3,8 +3,14 @@ import openai
 import os
 
 # Set your OpenAI API key from environment variables or Streamlit secrets
-# For local development, we'll use an environment variable.
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
+if not openai_api_key:
+    st.error("OpenAI API key is missing. Please set it in Streamlit Secrets.")
+    st.stop()
+
+# Initialize the OpenAI client with the key
+client = openai.OpenAI(api_key=openai_api_key)
 
 st.title("GM Genie: AI-Powered Quest Generator")
 st.write("Your creative co-pilot for legendary quests. Just give me a few details, and I'll whip up an adventure for your players!")
@@ -44,7 +50,7 @@ if submitted:
             """
 
             # Call the OpenAI API
-            response = openai.chat.completions.create(
+            response = client.chat.completions.create(
                 model="gpt-4o-2024-11-20",  # Using the model we decided on
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant for Dungeon Masters."},
