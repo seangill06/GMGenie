@@ -41,10 +41,12 @@ st.write("Your creative co-pilot for legendary quests. Just give me a few detail
 # Check if the user is a subscriber (for now, we'll check the quest count)
 with st.form("quest_form"):
     # The form content (all of your inputs)
-    quest_title = st.text_input("Quest Title", value="The Last Spark")
-    quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Investigation", "Escort", "Wilderness Survival"])
-    st.write("...and all of your other input fields")
-
+    campaign_context = st.text_input("Campaign Context", "Give an overview and context of your campaign, so the LLM can taylor the quest to fit within your world")
+    quest_theme = st.text_input("Quest Theme", "A forgotten library, a mischievous spirit, and a missing artifact")
+    number_players = st.selectbox("Number of Players", ["2", "3", "4", "5", "6", "Insanity"])
+    player_levels = st.text_input("Player Levels", "3-5")
+    quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Social Intrigue", "Mystery", "Escort Quest"])
+    
     # The generate button is a form submit button
     submit_button = st.form_submit_button("Generate Quest")
 
