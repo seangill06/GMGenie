@@ -15,6 +15,9 @@ st.header("Digital Anvil Designs")
 st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
 st.markdown("---")
 
+# --- This is the new debug line ---
+st.write(f"Dev Mode Status: {os.getenv('IS_DEV_MODE')}")
+
 # Initialize session state for the quest counter
 if 'quest_count' not in st.session_state:
     st.session_state.quest_count = 0
