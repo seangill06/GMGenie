@@ -62,10 +62,10 @@ if st.session_state.image_count < IMAGE_FREE_LIMIT or DEV_MODE:
                         quality="standard",
                         n=1,
                     )
-                image_url = image_response.data[0].url
-                st.image(image_url, caption=image_prompt)
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
+                    image_url = image_response.data[0].url
+                    st.image(image_url, caption=image_prompt)
+                except Exception as e:
+                    st.error(f"An error occurred: {e}")
 else:
     st.warning(f"You have reached the free limit of {IMAGE_FREE_LIMIT} images. Subscribe for unlimited image generation!")
     st.link_button("🚀 Subscribe Now!", "https://buy.stripe.com/dRm00ld9FdA2fgWc2kgjC02")
