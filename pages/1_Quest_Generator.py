@@ -37,7 +37,6 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai_api_key:
     st.error("OpenAI API key is missing. Please set it in Streamlit Secrets.")
-    st.stop()
 
 # Initialize the OpenAI client with the key
 client = openai.OpenAI(api_key=openai_api_key)
