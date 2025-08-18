@@ -18,8 +18,15 @@ FREE_LIMIT = 3 # You can adjust this number
 DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
 
 # --- This section is for Stripe verification and business information ---
-st.header("Digital Anvil Designs")
-st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
+col1, col2 = st.columns([1, 4]) # Create two columns, with the second one being wider
+
+with col1:
+    st.image("images/logo.png", width=120) # Use the correct path to your image and adjust the width
+
+with col2:
+    st.header("Digital Anvil Designs")
+    st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
+
 st.markdown("---")
 
 # --- The button to subscribe to your service ---
