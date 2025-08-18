@@ -2,10 +2,25 @@ import streamlit as st
 import openai
 import os
 
+# --- This sets the browser tab title, icon, and layout ---
+st.set_page_config(
+    page_title="GM Genie - AI-Powered Quest Generator",
+    page_icon="🔮",  # You can use an emoji or a URL to an image file
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # --- This section is for Stripe verification and business information ---
 st.header("Digital Anvil Designs")
 st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
 st.markdown("---")
+
+# Initialize session state for the quest counter
+if 'quest_count' not in st.session_state:
+    st.session_state.quest_count = 0
+
+FREE_LIMIT = 3 # You can adjust this number
+DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
 
 # --- The button to subscribe to your service ---
 st.link_button("🚀 Get Unlimited Quests!", "https://buy.stripe.com/fZu28td9FgMe1q63vOgjC00")
@@ -22,6 +37,30 @@ client = openai.OpenAI(api_key=openai_api_key)
 
 st.title("GM Genie: AI-Powered Quest Generator")
 st.write("Your creative co-pilot for legendary quests. Just give me a few details, and I'll whip up an adventure for your players!")
+
+# Check if the user is a subscriber (for now, we'll check the quest count)
+if st.session_state.quest_count < FREE_LIMIT or DEV_MODE:
+    # --- This is where the quest generation form starts ---
+    with st.form("quest_form"):
+        # The form content (all of your inputs)
+        ... (your existing input code goes here) ...
+        # The generate button is a form submit button
+        submit_button = st.form_submit_button("Generate Quest")
+
+    if submit_button:
+        st.session_state.quest_count += 1
+        with st.spinner("Generating your quest..."):
+            try:
+                # The code that generates the quest
+                ... (your existing API call code goes here) ...
+                # The code that displays the quest
+                ... (your existing display code goes here) ...
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
+
+else:
+    # --- This is the paywall message ---
+    st.warning(f"You have reached the free limit of {FREE_LIMIT} quests. Please subscribe for unlimited access!")
 
 # Input fields for the GM to customize the quest
 with st.form("quest_form"):
