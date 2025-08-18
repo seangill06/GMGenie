@@ -1,2 +1,7 @@
 [theme]
+# This section sets the default theme to be the dark one you like, but you can change it from the settings menu.
 base="dark"
+primaryColor="#55DDE0"  # A nice ice-blue for accents
+backgroundColor="#2C2C2C" # A deep charcoal grey
+secondaryBackgroundColor="#3B3B59" # A deep purple
+textColor="#FFFFFF" # White text for readability
