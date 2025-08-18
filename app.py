@@ -21,7 +21,7 @@ DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
 col1, col2 = st.columns([1, 4]) # Create two columns, with the second one being wider
 
 with col1:
-    st.image("images/logo.png", width=371) # Use the correct path to your image and adjust the width
+    st.image("images/logo.png", width=200) # Use the correct path to your image and adjust the width
 
 with col2:
     st.header("Digital Anvil Designs")
