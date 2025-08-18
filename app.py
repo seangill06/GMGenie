@@ -97,6 +97,6 @@ with st.form("quest_form"):
 
             except Exception as e:
                 st.error(f"An error occurred: {e}")
-    else:
-        # --- This is the paywall message ---
-        st.warning(f"You have reached the free limit of {FREE_LIMIT} quests. Please subscribe for unlimited access!")
+        else:
+            # --- This is the paywall message ---
+            st.warning(f"You have reached the free limit of {FREE_LIMIT} quests. Please subscribe for unlimited access!")
