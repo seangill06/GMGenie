@@ -6,7 +6,6 @@ import os
 st.set_page_config(
     page_title="GM Genie - AI-Powered Quest Generator",
     page_icon="🔮",  # You can use an emoji or a URL to an image file
-    layout="wide",
     initial_sidebar_state="expanded"
 )
 
