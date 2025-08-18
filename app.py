@@ -41,7 +41,7 @@ st.write("Your creative co-pilot for legendary quests. Just give me a few detail
 # Check if the user is a subscriber (for now, we'll check the quest count)
 with st.form("quest_form"):
     # The form content (all of your inputs)
-    campaign_context = st.text_input("Campaign Context", "Give an overview and context of your campaign, so the LLM can taylor the quest to fit within your world")
+    campaign_context = st.text_area("Campaign Context (optional)", help="Enter details about your existing campaign to make the quest fit better.")
     quest_theme = st.text_input("Quest Theme", "A forgotten library, a mischievous spirit, and a missing artifact")
     number_players = st.selectbox("Number of Players", ["2", "3", "4", "5", "6", "Insanity"])
     player_levels = st.text_input("Player Levels", "3-5")
@@ -56,13 +56,17 @@ with st.form("quest_form"):
             try:
                 # Our custom prompt, with user inputs
                 prompt = f"""
-                You are a master Dungeon Master's assistant, an expert at creating engaging and unique Dungeons & Dragons quests. Your task is to generate a detailed quest outline.
+                You are a master Dungeon Master's assistant, an expert at creating engaging and unique Dungeons & Dragons quests. Your task is to generate a detailed quest outline.  Please account for the number of players ({number_players}) and level of players ({player_levels}) to ensure the adventure is scaled appropriately.
+
+                The user wants a quest based on the following details, please use the following campaign context to help create the quest:
+                {campaign_context}
 
                 Here are the specific requirements:
                 - **Quest Title:**
                 - **Quest Giver:**
                 - **Quest Type:** {quest_type}
                 - **Setting/Theme:** {quest_theme}
+                - **Number of Players:** {number_players}
                 - **Player Level:** {player_levels}
                 - **Key NPCs:** (at least 2, a friendly one and a suspicious one)
                 - **Primary Conflict:** (the main problem)
