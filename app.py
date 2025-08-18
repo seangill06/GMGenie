@@ -28,8 +28,9 @@ with col2:
 
 st.markdown("---")
 
-# --- The button to subscribe to your service ---
-st.link_button("🚀 Get Unlimited Quests!", "https://buy.stripe.com/fZu28td9FgMe1q63vOgjC00")
+st.subheader("Unlock Unlimited AI Quests!")
+st.markdown("Upgrade to a **GM Genie Pro** subscription to get unlimited quests, remove the free-tier limitations, and support future development.")
+st.link_button("🚀 Subscribe Now!", "https://buy.stripe.com/dRm00ld9FdA2fgWc2kgjC02")
 
 # Set your OpenAI API key from environment variables or Streamlit secrets
 openai_api_key = os.getenv("OPENAI_API_KEY")
