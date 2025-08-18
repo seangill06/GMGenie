@@ -2,13 +2,6 @@ import streamlit as st
 import openai
 import os
 
-# Initialize session state for the quest counter
-if 'quest_count' not in st.session_state:
-    st.session_state.quest_count = 0
-
-FREE_LIMIT = 3 # You can adjust this number
-DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
-
 # --- This sets the browser tab title, icon, and layout ---
 st.set_page_config(
     page_title="GM Genie - AI-Powered Quest Generator",
@@ -16,6 +9,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Initialize session state for the quest counter
+if 'quest_count' not in st.session_state:
+    st.session_state.quest_count = 0
+
+FREE_LIMIT = 3 # You can adjust this number
+DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
 
 # --- This section is for Stripe verification and business information ---
 st.header("Digital Anvil Designs")
