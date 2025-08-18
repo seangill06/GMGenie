@@ -2,6 +2,13 @@ import streamlit as st
 import openai
 import os
 
+# Initialize session state for the quest counter
+if 'quest_count' not in st.session_state:
+    st.session_state.quest_count = 0
+
+FREE_LIMIT = 3 # You can adjust this number
+DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
+
 # --- This sets the browser tab title, icon, and layout ---
 st.set_page_config(
     page_title="GM Genie - AI-Powered Quest Generator",
@@ -14,16 +21,6 @@ st.set_page_config(
 st.header("Digital Anvil Designs")
 st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
 st.markdown("---")
-
-# --- This is the new debug line ---
-st.write(f"Dev Mode Status: {os.getenv('IS_DEV_MODE')}")
-
-# Initialize session state for the quest counter
-if 'quest_count' not in st.session_state:
-    st.session_state.quest_count = 0
-
-FREE_LIMIT = 3 # You can adjust this number
-DEV_MODE = os.getenv("IS_DEV_MODE") == "True"
 
 # --- The button to subscribe to your service ---
 st.link_button("🚀 Get Unlimited Quests!", "https://buy.stripe.com/fZu28td9FgMe1q63vOgjC00")
