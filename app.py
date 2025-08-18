@@ -2,6 +2,11 @@ import streamlit as st
 import openai
 import os
 
+# --- This section is for Stripe verification and business information ---
+st.header("Digital Anvil Designs")
+st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
+st.markdown("---")
+
 # Set your OpenAI API key from environment variables or Streamlit secrets
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
