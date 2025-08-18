@@ -7,6 +7,9 @@ st.header("Digital Anvil Designs")
 st.markdown("Your home for premium, AI-powered tools for tabletop role-playing games.")
 st.markdown("---")
 
+# --- The button to subscribe to your service ---
+st.link_button("🚀 Get Unlimited Quests!", "https://buy.stripe.com/fZu28td9FgMe1q63vOgjC00")
+
 # Set your OpenAI API key from environment variables or Streamlit secrets
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
