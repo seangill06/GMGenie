@@ -3,7 +3,7 @@ import openai
 import os
 
 # Set your OpenAI API key from environment variables or Streamlit secrets
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 if not openai_api_key:
     st.error("OpenAI API key is missing. Please set it in Streamlit Secrets.")
@@ -50,7 +50,7 @@ if submitted:
             """
 
             # Call the OpenAI API
-            response = client.chat.completions.create(
+            response = client.chat.completions.create(  
                 model="gpt-4o-2024-11-20",  # Using the model we decided on
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant for Dungeon Masters."},
