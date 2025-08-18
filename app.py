@@ -39,64 +39,66 @@ st.title("GM Genie: AI-Powered Quest Generator")
 st.write("Your creative co-pilot for legendary quests. Just give me a few details, and I'll whip up an adventure for your players!")
 
 # Check if the user is a subscriber (for now, we'll check the quest count)
-with st.form("quest_form"):
-    # The form content (all of your inputs)
-    campaign_context = st.text_area("Campaign Context (optional)", help="Enter details about your existing campaign to make the quest fit better.")
-    quest_theme = st.text_input("Quest Theme", "A forgotten library, a mischievous spirit, and a missing artifact")
-    number_players = st.selectbox("Number of Players", ["2", "3", "4", "5", "6", "Insanity"])
-    player_levels = st.text_input("Player Levels", "3-5")
-    quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Social Intrigue", "Mystery", "Escort Quest"])
-    
-    # The generate button is a form submit button
-    submit_button = st.form_submit_button("Generate Quest")
+if st.session_state.quest_count < FREE_LIMIT or DEV_MODE:
+    # --- This block shows the form because the user is not yet at the limit ---
+    with st.form("quest_form"):
+        # The form content (all of your inputs)
+        campaign_context = st.text_area("Campaign Context (optional)", help="Enter details about your existing campaign to make the quest fit better.")
+        quest_theme = st.text_input("Quest Theme", "A forgotten library, a mischievous spirit, and a missing artifact")
+        number_players = st.selectbox("Number of Players", ["2", "3", "4", "5", "6", "Insanity"])
+        player_levels = st.text_input("Player Levels", "3-5")
+        quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Social Intrigue", "Mystery", "Escort Quest"])
+        
+        # The generate button is a form submit button
+        submit_button = st.form_submit_button("Generate Quest")
 
-    if submit_button:
-        st.session_state.quest_count += 1
-        with st.spinner("Generating your quest..."):
-            try:
-                # Our custom prompt, with user inputs
-                prompt = f"""
-                You are a master Dungeon Master's assistant, an expert at creating engaging and unique Dungeons & Dragons quests. Your task is to generate a detailed quest outline.  Please account for the number of players ({number_players}) and level of players ({player_levels}) to ensure the adventure is scaled appropriately.
+        if submit_button:
+            st.session_state.quest_count += 1
+            with st.spinner("Generating your quest..."):
+                try:
+                    # Our custom prompt, with user inputs
+                    prompt = f"""
+                    You are a master Dungeon Master's assistant, an expert at creating engaging and unique Dungeons & Dragons quests. Your task is to generate a detailed quest outline.  Please account for the number of players ({number_players}) and level of players ({player_levels}) to ensure the adventure is scaled appropriately.
 
-                The user wants a quest based on the following details, please use the following campaign context to help create the quest:
-                {campaign_context}
+                    The user wants a quest based on the following details, please use the following campaign context to help create the quest:
+                    {campaign_context}
 
-                Here are the specific requirements:
-                - **Quest Title:**
-                - **Quest Giver:**
-                - **Quest Type:** {quest_type}
-                - **Setting/Theme:** {quest_theme}
-                - **Number of Players:** {number_players}
-                - **Player Level:** {player_levels}
-                - **Key NPCs:** (at least 2, a friendly one and a suspicious one)
-                - **Primary Conflict:** (the main problem)
-                - **Three-Act Structure:**
-                    * **Act 1: The Hook:** How do the players get involved?
-                    * **Act 2: The Rising Action:** What challenges do they face? Include a puzzle, a combat encounter, and a social challenge.
-                    * **Act 3: The Climax:** What is the final confrontation?
-                - **Reward:** (e.g., gold, a magic item, a favor)
-                - **Optional: Plot Twist:** A short, unexpected reveal that can surprise the players.
+                    Here are the specific requirements:
+                    - **Quest Title:**
+                    - **Quest Giver:**
+                    - **Quest Type:** {quest_type}
+                    - **Setting/Theme:** {quest_theme}
+                    - **Number of Players:** {number_players}
+                    - **Player Level:** {player_levels}
+                    - **Key NPCs:** (at least 2, a friendly one and a suspicious one)
+                    - **Primary Conflict:** (the main problem)
+                    - **Three-Act Structure:**
+                        * **Act 1: The Hook:** How do the players get involved?
+                        * **Act 2: The Rising Action:** What challenges do they face? Include a puzzle, a combat encounter, and a social challenge.
+                        * **Act 3: The Climax:** What is the final confrontation?
+                    - **Reward:** (e.g., gold, a magic item, a favor)
+                    - **Optional: Plot Twist:** A short, unexpected reveal that can surprise the players.
 
-                Please generate a detailed and inspiring quest based on the requirements above. The output should be a well-formatted narrative clearly labeled with each section.
-                """
+                    Please generate a detailed and inspiring quest based on the requirements above. The output should be a well-formatted narrative clearly labeled with each section.
+                    """
 
-                # Call the OpenAI API
-                response = client.chat.completions.create(  
-                    model="gpt-4o-2024-11-20",  # Using the model we decided on
-                    messages=[
-                        {"role": "system", "content": "You are a helpful assistant for Dungeon Masters."},
-                        {"role": "user", "content": prompt}
-                    ],
-                    temperature=0.8
-                )
+                    # Call the OpenAI API
+                    response = client.chat.completions.create(  
+                        model="gpt-4o-2024-11-20",  # Using the model we decided on
+                        messages=[
+                            {"role": "system", "content": "You are a helpful assistant for Dungeon Masters."},
+                            {"role": "user", "content": prompt}
+                        ],
+                        temperature=0.8
+                    )
 
-                # Display the generated text
-                st.markdown("---")
-                st.subheader("Your Quest:")
-                st.write(response.choices[0].message.content)
+                    # Display the generated text
+                    st.markdown("---")
+                    st.subheader("Your Quest:")
+                    st.write(response.choices[0].message.content)
 
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-    else:
-        # --- This is the paywall message ---
-        st.warning(f"You have reached the free limit of {FREE_LIMIT} quests. Please subscribe for unlimited access!")
+                except Exception as e:
+                    st.error(f"An error occurred: {e}")
+else:
+    # --- This is the paywall message ---
+    st.warning(f"You have reached the free limit of {FREE_LIMIT} quests. Please subscribe for unlimited access!")
