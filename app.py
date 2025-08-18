@@ -39,13 +39,14 @@ st.title("GM Genie: AI-Powered Quest Generator")
 st.write("Your creative co-pilot for legendary quests. Just give me a few details, and I'll whip up an adventure for your players!")
 
 # Check if the user is a subscriber (for now, we'll check the quest count)
-if st.session_state.quest_count < FREE_LIMIT or DEV_MODE:
-    # --- This is where the quest generation form starts ---
-    with st.form("quest_form"):
-        # The form content (all of your inputs)
-        ... (your existing input code goes here) ...
-        # The generate button is a form submit button
-        submit_button = st.form_submit_button("Generate Quest")
+with st.form("quest_form"):
+    # The form content (all of your inputs)
+    quest_title = st.text_input("Quest Title", value="The Last Spark")
+    quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Investigation", "Escort", "Wilderness Survival"])
+    st.write("...and all of your other input fields")
+
+    # The generate button is a form submit button
+    submit_button = st.form_submit_button("Generate Quest")
 
     if submit_button:
         st.session_state.quest_count += 1
