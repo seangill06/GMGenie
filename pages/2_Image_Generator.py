@@ -53,14 +53,15 @@ if st.session_state.image_count < IMAGE_FREE_LIMIT or DEV_MODE:
     if submit_image_button:
             # The API call for image generation
             st.session_state.image_count += 1
-            with st.spinner("Generating your image..."):            try:
-                image_response = client.images.generate(
-                    model="dall-e-3",
-                    prompt=image_prompt,
-                    size="1024x1024",
-                    quality="standard",
-                    n=1,
-                )
+            with st.spinner("Generating your image..."):            
+                try:
+                    image_response = client.images.generate(
+                        model="dall-e-3",
+                        prompt=image_prompt,
+                        size="1024x1024",
+                        quality="standard",
+                        n=1,
+                    )
                 image_url = image_response.data[0].url
                 st.image(image_url, caption=image_prompt)
             except Exception as e:
