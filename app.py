@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 # --- This section is for Stripe verification and business information ---
-col1, col2 = st.columns([1, 4]) # Create two columns, with the second one being wider
+col1, col2 = st.columns([2, 3]) # Create two columns, with the second one being wider
 
 with col1:
     st.image("images/logo.png", width=400) # Use the correct path to your image and adjust the width
