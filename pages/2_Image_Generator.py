@@ -47,7 +47,7 @@ st.markdown("Create a custom image for your quest!")
 if st.session_state.image_count < IMAGE_FREE_LIMIT or DEV_MODE:
     # The form and API call for image generation
     with st.form("image_form"):
-        image_prompt = st.text_area("Image Prompt", "An adventurer standing on a cliff, looking at a dragon's lair")
+        image_prompt = st.text_area("Image Prompt", help="An adventurer standing on a cliff, looking at a dragon's lair")
         submit_image_button = st.form_submit_button("Generate Image")
 
     if submit_image_button:

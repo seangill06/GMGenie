@@ -51,11 +51,11 @@ with st.container(width=700):  # You can adjust the width value
         # --- This block shows the form because the user is not yet at the limit ---
         with st.form("quest_form"):
             # The form content (all of your inputs)
-            campaign_context = st.text_area("Campaign Context (optional)", "Enter details about your existing campaign to make the quest fit better.")
-            quest_theme = st.text_input("Quest Theme", "A forgotten library, a mischievous spirit, and a missing artifact")
+            campaign_context = st.text_area("Campaign Context (optional)", help="Enter details about your existing campaign to make the quest fit better.")
+            quest_theme = st.text_input("Quest Theme", help="A forgotten library, a mischievous spirit, and a missing artifact")
             number_players = st.selectbox("Number of Players", ["2", "3", "4", "5", "6", "Insanity"])
-            player_levels = st.text_input("Player Levels", "3-5")
-            quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Social Intrigue", "Mystery", "Escort Quest"])
+            player_levels = st.text_input("Player Levels", help="3-5")
+            quest_type = st.selectbox("Quest Type", ["Dungeon Crawl", "Outdoor Adventure", "Social Intrigue", "Mystery", "Escort Quest"])
             
             # The generate button is a form submit button
             submit_button = st.form_submit_button("Generate Quest")
